@@ -1,13 +1,23 @@
 import { Divider } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "@/utils/firebase";
 import { useRouter } from "next/router";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function login() {
   const googleProvider = new GoogleAuthProvider();
   const route = useRouter();
+  const [user, loading] = useAuthState(auth);
+
+  useEffect(() => {
+    if (user) {
+      route.push("/");
+    } else {
+      console.log("login");
+    }
+  }, [user]);
 
   const GoogleLogin = async () => {
     try {

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { auth } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Divider } from "@material-ui/core";
 import Avatar from "react-avatar";
 
 const Nav = () => {

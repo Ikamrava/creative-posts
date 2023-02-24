@@ -10,7 +10,7 @@ const Nav = () => {
   return (
     <nav className=" flex justify-between items-center py-10 font-bold">
       <Link href="/">
-        <button className=" text-lg font-medium">Creative Posts</button>
+        <button className=" text-lg font-medium">Be Creative</button>
       </Link>
       <ul className=" flex items-center gap-10 ">
         {!user ? (
@@ -24,9 +24,9 @@ const Nav = () => {
           <div className="flex items-center gap-6">
             <Link
               href="/post"
-              className=" py-2 text-sm bg-cyan-500 px-6 rounded-lg text-white font-medium"
+              className=" py-1 text-sm bg-cyan-500 px-2 rounded-md text-white font-medium"
             >
-              Post
+              Send a post
             </Link>
             <Link href="/dashboard" className=" ">
               <Avatar

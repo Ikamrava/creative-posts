@@ -11,12 +11,29 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { BsEmojiLaughing } from "react-icons/bs";
 
 function post() {
+  const [showEmojis, setShowEmojis] = useState(false);
+
   const [post, setPost] = useState({ description: "" });
   const [user, loading] = useAuthState(auth);
   const route = useRouter();
   const routeData = route.query;
+
+  const addEmoji = (e) => {
+    let sym = e.unified.split("-");
+    let codesArray = [];
+    sym.forEach((el) => codesArray.push("0x" + el));
+    let emoji = String.fromCodePoint(...codesArray);
+
+    setPost((prev) => ({
+      ...prev,
+      description: prev.description + emoji,
+    }));
+  };
 
   const submitPost = async (event) => {
     event.preventDefault();
@@ -91,14 +108,26 @@ function post() {
             }
             className=" bg-gray-600 h-48 w-full text-white rounded-lg p-2 text-md"
           ></textarea>
-          <p
-            className={
-              post.description.length > 300 ? " text-red-600" : " text-black"
-            }
-          >
-            {post.description.length}/300
-          </p>
+          <div className=" flex items-center justify-between">
+            <div
+              onClick={() => setShowEmojis(!showEmojis)}
+              className=" flex gap-3 items-center text-cyan-500 cursor-pointer"
+            >
+              <BsEmojiLaughing className=" text-lg" />
+              <span>Emoji</span>
+            </div>
+            <p
+              className={
+                post.description.length > 300 ? " text-red-600" : " text-black"
+              }
+            >
+              {post.description.length}/300
+            </p>
+          </div>
         </div>
+
+        {showEmojis && <Picker data={data} onEmojiSelect={addEmoji} />}
+
         <button
           onClick={submitPost}
           className={" w-full bg-cyan-600 rounded-lg text-white py-2"}

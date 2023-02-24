@@ -38,7 +38,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="my-12 text-lg">
-        <h2 className=" py-4">See what is going on</h2>
+        <h2 className=" py-4 font-bold font-Roboto">What is going on 🤩 </h2>
         {allposts.map((post) => (
           <Message {...post} key={post.id} />
         ))}

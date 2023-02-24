@@ -6,10 +6,9 @@ import Avatar from "react-avatar";
 
 const Nav = () => {
   const [user, loading] = useAuthState(auth);
-  console.log(user);
 
   return (
-    <nav className=" flex justify-between items-center py-10">
+    <nav className=" flex justify-between items-center py-10 font-bold">
       <Link href="/">
         <button className=" text-lg font-medium">Creative Posts</button>
       </Link>
@@ -25,7 +24,7 @@ const Nav = () => {
           <div className="flex items-center gap-6">
             <Link
               href="/post"
-              className=" py-2 text-sm bg-cyan-500 px-2 rounded-lg text-white font-medium"
+              className=" py-2 text-sm bg-cyan-500 px-6 rounded-lg text-white font-medium"
             >
               Post
             </Link>

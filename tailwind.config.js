@@ -1,3 +1,5 @@
+const { Roboto } = require("next/font/google");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Poppins: "Poppins",
+        Roboto: ["Roboto"],
       },
     },
   },

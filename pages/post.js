@@ -1,12 +1,47 @@
 import { auth, db } from "@/utils/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { RouteHandlerManager } from "next/dist/server/future/route-handler-managers/route-handler-manager";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 
 function post() {
   const [post, setPost] = useState({ description: "" });
-  const submitPost = async (e) => {
-    e.preventDefault();
+  const [user, loading] = useAuthState(auth);
+  const route = useRouter();
+
+  const submitPost = async (event) => {
+    event.preventDefault();
+
+    if (!post.description) {
+      toast.error("Description field is empty", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
+      return;
+    }
+
+    if (post.description.length > 300) {
+      toast.error("Description is too long");
+      return;
+    }
+
+    const collectionRef = collection(db, "posts");
+    try {
+      await addDoc(collectionRef, {
+        ...post,
+        timestamp: serverTimestamp(),
+        userID: user.uid,
+        avatar: user.photoURL,
+        username: user.displayName,
+      });
+      setPost({ description: "" });
+
+      return route.push("/");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -31,13 +66,8 @@ function post() {
           </p>
         </div>
         <button
-          onSubmit={submitPost}
-          type="submit"
-          className={
-            post.description.length > 300
-              ? " hidden"
-              : " w-full bg-cyan-600 rounded-lg text-white py-2"
-          }
+          onClick={submitPost}
+          className={" w-full bg-cyan-600 rounded-lg text-white py-2"}
         >
           Submit
         </button>

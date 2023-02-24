@@ -1,4 +1,3 @@
-import { Divider } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";

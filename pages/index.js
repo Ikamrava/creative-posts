@@ -1,7 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+
 import Message from "@/components/Message";
 import { db } from "@/utils/firebase";
 import { useEffect, useState } from "react";

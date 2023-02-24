@@ -2,7 +2,7 @@ import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { async } from "@firebase/util";
+
 import {
   collection,
   deleteDoc,

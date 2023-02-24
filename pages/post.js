@@ -6,7 +6,7 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { RouteHandlerManager } from "next/dist/server/future/route-handler-managers/route-handler-manager";
+
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
